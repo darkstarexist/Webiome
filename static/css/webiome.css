@@ -1,0 +1,362 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    color: aqua;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    background-color: #212121;
+    overflow: hidden;
+}
+
+.databox{
+    display: flex;
+    height: 10vh;
+    align-items: center;
+    border-bottom: 0.1px solid gray;
+    justify-content: center;
+    background-color: #121212;
+    flex-shrink: 0;
+    /* overflow: auto; */
+    box-shadow: cyan 0 5px 15px;
+    /* height: auto; */
+
+}
+
+input{
+    font-size: 1.5em;
+    background-color: #212121;
+    text-align: center;
+    margin: 8px 0px;
+    border:1px solid cyan;
+    color: #fb1466;
+    padding: 16px 46px;
+}
+
+#savebtn{
+    margin:8px 0px 32px 0px ;
+    padding: 8px 12px;
+    color: #fb1466;
+    font-size: 2em;
+    cursor: pointer;
+    background-color: rgb(50, 55, 55);
+
+}
+
+input::placeholder{
+    color: #5e5a5b;
+}
+
+.saveinfobox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    position: absolute;
+    /* background-color: black; */
+    display: none;
+    
+}
+
+/* Change Autocomplete styles in Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: 2px solid #fb1466;
+    -webkit-text-fill-color: cyan;
+    -webkit-box-shadow: 0 0 0px 1000px #212121 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.close-btn{
+    position:relative;
+    top: 0;
+    right: 0;
+    border-radius: 32px;
+    padding: 18px 22px;
+    font-size: 18px;
+    border: 2px solid cyan;
+}
+
+.close-btn:hover{
+    font-size: 18px;
+    color: aqua;
+    cursor: pointer;
+    
+    box-shadow: cyan 0 5px 15px;
+
+}
+
+.saveuserbox{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    height: 60vh;
+    width: 30vw;
+    background-color: #121212;
+}
+
+.close-icon{
+    margin-top: 32px;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 64px;
+}
+
+
+.saveinfobox::before{
+    content: "";
+    position: absolute;
+    background-color: #121212;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.userinfoscroll{
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-color: cyan #121212;
+}
+
+.userinfobox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+
+.alluserbox{
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    background-color: #212121;
+    /* align-items: center; */
+    height: 100%;
+    width: 30%;
+    border-right: 0.1px solid grey;
+    /* overflow-y: scroll; */
+}
+
+.mainbox{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dobox{
+    display: flex;
+    /* position: absolute; */
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 70vw;
+    border-bottom: 0.1px solid grey;
+    background-color: #121212;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.plus-icon{
+    background-color: #212121;
+    border-radius: 32px;
+    margin: 0 12px;
+    padding: 16px 16px;
+    border: 2px solid cyan;
+    transition: all .2s;
+}
+
+.plus-icon:hover{
+    font-size: 18px;
+    color: aqua;
+    cursor: pointer;
+    
+    box-shadow: cyan 0 5px 15px;
+}
+
+
+
+#user-name{
+    color: cyan;
+    border-radius: 12px;
+}
+
+
+
+.dobox{
+    flex-shrink: 0;
+    box-shadow: cyan 0 5px 15px;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.error{
+    color: #fb1466;
+}
+
+#userinfo{
+    display: block;
+    width: 100%;
+    color: #fb1466;
+    text-align: center;
+    font-size: 1.6em;
+    padding: 12px 0px;
+    border-bottom: 2px solid cyan;
+    transition: all .3s;
+}
+
+#userinfo:hover{
+    background-color: #272727;
+    color: aqua;
+    cursor: pointer;
+}
+
+
+.userinfobox{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100vh;
+}
+
+
+.chatbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.showmsg{
+    height: 560px;
+    width: 1000px;
+    background-color: #121212;
+}
+
+#sendmsgform{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#msginput{
+    width: 700px;
+}
+
+
+
+.showmsg{
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-color: cyan #121212;
+}
+
+.chatbox{
+    margin-top: 20px;
+}
+
+#msg{
+    display: inline;
+    border-radius: 12px;
+    background-color: #212121;
+    padding: 12px 8px;
+}
+
+.msgbox{
+    /* display: flex; */
+    margin: 22px 12px;
+    text-align: right;
+    align-items: center;
+}
+
+.left{
+    text-align: left;
+}
+
+.right{
+    text-align: right;
+    
+}
+
+.right p{
+    color: #fb1466;
+}
+
+.showmsg{
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+}
+
+#user-name{
+    font-size: 22px;
+}
+
+#user-name:hover{
+    cursor: pointer;
+}
+
+.joinroomicon{
+    font-size: 16px;
+    background-color: #212121;
+    border-radius: 32px;
+    padding: 16px 16px;
+    margin: 0 12px;
+    border: 2px solid cyan;
+    transition: all .2s;
+}
+
+.joinroomicon:hover{
+    font-size: 18px;
+    color: aqua;
+    cursor: pointer;
+    
+    box-shadow: cyan 0 5px 15px;
+}
+
+.reload-icon{
+    background-color: #212121;
+    border-radius: 32px;
+    margin: 0 12px;
+    padding: 16px 16px;
+    border: 2px solid cyan;
+    transition: all .2s;
+}
+
+.reload-icon:hover{
+    font-size: 18px;
+    color: aqua;
+    cursor: pointer;
+    box-shadow: cyan 0 5px 15px;
+}

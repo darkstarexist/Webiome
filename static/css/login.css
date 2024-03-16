@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    background-color: #0d1117;
+    display: flex;
+    height: 100vh;
+    /* flex-direction: row; */
+    /* position: sticky; */
+    align-items: center;
+    justify-content: center;
+}
+
+.signup{
+    text-decoration: none;
+    color: #fb1466;
+    font-size: 22px;
+    
+}
+
+.signup:hover{
+    color: aqua;
+}
+
+.showlogo img{
+    height: 80px;
+    width: 80px;
+}
+
+.showlogo h1{
+    color: #fb1466;
+    font-size: 64px;
+    margin-left: 22px;
+}
+
+.showlogo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0px 16px 0px;
+}
+
+.form-div form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=password]::-ms-reveal,input[type=password]::-ms-clear{display: none;} /*remove the show/hide button in input type = password*/
+
+/* input[type=password]::-ms-reveal,input[type=password]::-ms-clear{
+    background-image: url("../img/show.png");
+} */
+
+
+.form-div form input{
+    font-size: 1.5em;
+    background-color: #212121;
+    text-align: center;
+    margin: 8px 0px;
+    border:1px solid cyan;
+    color: cyan;
+    padding: 16px 46px;
+}
+
+.form-div form input::placeholder{
+    color: #5e5a5b;
+}
+
+
+
+
+
+#login-btn{
+    margin:8px 0px 32px 0px ;
+    padding: 8px 12px;
+    color: #fb1466;
+    font-size: 2em;
+    cursor: pointer;
+    background-color: rgb(50, 55, 55);
+
+}
+
+#invalidmsg{
+    color: #fb1466;
+
+}
+
+.form-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-box:focus{
+    /* border: cyan; */
+    outline: none;
+    border:2px solid #fb1466;
+    /* transition: 2s all; */
+}
+
+#input-btn:hover{
+    font-size: 1em;
+    background-color: #212121;
+}
+
+#logo-txt{
+    font-size: 4em;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: cyan;
+    position: absolute;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: cyan 0px 22px 70px 4px;
+    z-index: 1;
+    height: 70vh;
+    width: 40vw;
+}
+
+/* Change Autocomplete styles in Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: 2px solid #fb1466;
+    -webkit-text-fill-color: cyan;
+    -webkit-box-shadow: 0 0 0px 1000px #212121 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.main::before{
+    content: "";
+    position: absolute;
+    height: 180%;
+    width: 180px;
+    background-color: #fb1466;
+    box-shadow: #fb1466 0px 30px 30px;
+    box-shadow: 0 0 20px rgb(52, 52, 52);
+    animation: animate 4s linear infinite;
+
+    z-index: -2;
+}
+
+.main::after{
+    content: "";
+    position: absolute;
+    inset: 3px;
+    /* inset-inline-end: 16px;
+    inset-block-end: 16px; */
+    background-color: #212121;
+    border-radius: 16px;
+    
+    z-index: -1;
+
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+
+@media only screen and (max-width:455px) {
+    .main{
+        width: 85vw;
+    }
+    .form-div form input{ 
+        font-size: 0.8em;
+    }
+    #logo-txt{
+        font-size: 2em;
+    }
+
+    .showlogo img{
+        height: 40px;
+        width: 40px;
+    }
+}
+
+@media only screen and (min-width:455px) and (max-width:750px){
+    .main{
+        width: 85vw;
+    }
+}

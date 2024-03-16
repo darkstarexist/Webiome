@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webiome</title>
+    <script src="https://kit.fontawesome.com/32a16c6bd6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/webiome.css">
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+
+<body>
+    <div class="saveinfobox createroomdiv">
+        <div class="saveuserbox">
+            <div class="close-icon">
+                <i class="fa-solid fa-xmark close-btn"></i>
+            </div>
+            <div class="inputs">
+                <form id="form" class="createroomform">
+                    <input type="text" name="alias" id="alias" placeholder="ALIAS">
+                    <input type="text" name="code" id="code" placeholder="ROOM CODE" class="createcode">
+                    <input type="submit" value="Save" id="savebtn">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="saveinfobox joinroomdiv">
+        <div class="saveuserbox">
+            <div class="joinclose-icon">
+                <i class="fa-solid fa-xmark close-btn"></i>
+            </div>
+            <div class="inputs">
+                <form id="form" class="joinroomform">
+                    <input type="text" name="code" id="code" placeholder="ROOM CODE">
+                    <input type="submit" value="Save" id="savebtn">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="alluserbox">
+        <div class="databox">
+            <p id="user-name"></p>
+        </div>
+        <div class="userinfoscroll">
+            <div class="userinfobox">
+                {{!-- <p id="userinfo">{{name}}</p> --}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mainbox">
+        <div class="dobox">
+            <i class="fa-solid fa-plus plus-icon"></i>
+            <i class="fa-solid fa-rotate-right reload-icon"></i>
+        </div>
+        <div class="contentscroll">
+            <div class="content">
+                <div class="chatbox">
+                    <div class="showmsg"></div>
+                    <form id="sendmsgform">
+                        <input type="text" name="msginput" id="msginput" placeholder="Enter your Message">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    // all variables
+    //join and create room variables
+    const name = `{{name}}`;
+    console.log(name);
+
+    const createroomdiv = document.getElementsByClassName("createroomdiv")[0];
+    const joinroomdiv = document.getElementsByClassName("joinroomdiv")[0];
+    const plusicon = document.getElementsByClassName("plus-icon")[0];
+    const closecreate = document.getElementsByClassName("close-btn")[0];
+    const reloadicon = document.getElementsByClassName("reload-icon")[0];
+    const joincloseicon = document.getElementsByClassName("joinclose-icon")[0];
+    const createcode = document.getElementsByClassName("createcode")[0];
+    const createroomform = document.getElementsByClassName("createroomform")[0];
+    const codearea = document.getElementById("user-name");
+    const sendmsgform = document.getElementById("sendmsgform");
+    const msginput = document.getElementById("msginput");
+    const alias = document.getElementById("alias");
+    const showmsg = document.getElementsByClassName("showmsg")[0];
+    const userinfobox = document.getElementsByClassName("userinfobox")[0];
+
+
+
+    //append msg function
+    function appendmsg(msg, position = "left") {
+        let msgpara = document.createElement("p");
+        msgpara.id = "msg";
+        msgpara.innerText = msg;
+
+        let msgdiv = document.createElement("div");
+
+        msgdiv.className = `msgbox ${position}`;
+
+        msgdiv.appendChild(msgpara);
+        showmsg.appendChild(msgdiv);
+    }
+
+    function randomcode() {
+        let pass = '';
+        let str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+            'abcdefghijklmnopqrstuvwxyz0123456789@#$';
+
+        for (let i = 1; i <= 8; i++) {
+            let char = Math.floor(Math.random() * str.length + 1);
+
+            pass += str.charAt(char)
+        }
+
+        return pass;
+    }
+
+
+
+    //socket instance
+    const socket = io();
+
+    //event listeners for join and create room
+    plusicon.addEventListener("click", () => {
+        createroomdiv.style.display = "flex";
+        createcode.value = randomcode();
+    })
+
+    closecreate.addEventListener("click", () => {
+        createroomdiv.style.display = "none";
+    })
+
+    reloadicon.addEventListener("click", () => {
+        showmsg.innerHTML = "";
+        codearea.innerText = randomcode();
+    })
+
+    joincloseicon.addEventListener("click", () => {
+        joinroomdiv.style.display = "none";
+    })
+
+    //socket eventlistener
+    createroomform.addEventListener('submit', (e) => {
+        e.preventDefault();
+        socket.emit("createroom", { code: createcode.value, alias: name, id:socket.id});
+    })
+
+    //copycode
+    codearea.addEventListener("click", () => {
+        navigator.clipboard.writeText(codearea.innerText);
+        alert(`code : ${codearea.innerText} copied!`)
+    })
+
+    //socket on
+    socket.on("joinedroom", (data) => {
+        const _code = data.code;
+        codearea.innerText = _code;
+
+        const infopara = document.createElement("p");
+        infopara.id = "userinfo";
+        infopara.innerText = data.name;
+        userinfobox.appendChild(infopara);
+
+        createroomdiv.style.display = "none";
+    })
+
+    socket.on("roommsg", (data) => {
+        appendmsg(`${data.name} : ${data.msg}`, "right");
+    })
+
+
+
+    //send msg event listener
+    sendmsgform.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (msginput.value == "") {
+            return 0;
+        }
+        socket.emit("sendmsg", { code: codearea.innerText, msg: msginput.value, name:name});
+        appendmsg(`you : ${msginput.value}`, "left");
+        msginput.value = "";
+    })
+
+    //socket event on connection
+
+
+    //when room joined
+    socket.on("roomjoined", (data) => {
+        codearea.innerText = data.roomcode;
+    })
+
+    //when login
+    socket.on("logindata", (data) => {
+        console.log(data.name);
+    })
+
+
+    //when connection
+    socket.on("connect", () => {
+        socket.emit("user-joined", { name: name, id: socket.id })
+    })
+</script>
+
+</html>

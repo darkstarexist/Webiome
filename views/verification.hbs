@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webiome</title>
+    <link rel="stylesheet" href="css/verification.css">
+    <link rel="icon" href="img/death.png">
+</head>
+
+<body>
+    <div class="main">
+        <div class="showlogo">
+            <img src="img/death.png" id="logo-img">
+            <h1 id="logo-txt">Verification</h1>
+        </div>
+        <div class="form-div">
+            <form method="post" action="/verify" autocomplete="off">
+                <label for="msg" id="para">Your verification code is sended to {{email}}</label>
+                <input type="number" name="code" placeholder="Verification code" autocomplete="off" class="input-box">
+                <input type="submit" name="submit" title="submit" value="submit" id="login-btn">
+            </form>
+
+
+            {{#if error}}
+                <p id="invalidmsg">{{error}}</p>
+            {{/if}}
+
+
+
+
+        </div>
+
+</body>
+
+</html>

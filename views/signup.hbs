@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webiome - Login</title>
+    <link rel="stylesheet" href="css/signup.css">
+    <link rel="icon" href="img/death.png">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="showlogo">
+            <img src="img/death.png" id="logo-img">
+            <h1 id="logo-txt">SIGNUP</h1>
+        </div>
+        <div class="form-div">
+            <form method="post" action="/signup" autocomplete="off">
+                <input type="text" name="username" placeholder="Username" autocomplete="off" class="input-box" id="user-input">
+                <input type="email" name="email" placeholder="Email Address" autocomplete="off" class="input-box" id="email-iput">
+                <input type="password" name="password" placeholder="Password" class="input-box">
+                <input type="submit" name="submit" title="signup" value="Signup" id="signup-btn">
+            </form>
+
+        
+
+            <a href="/" class="signup">Already have a account?</a>
+
+            {{#if error}}
+                <p id="invalidmsg">{{error}}</p>
+            {{/if}}
+
+
+
+
+        </div>
+
+
+</body>
+
+</html>
